@@ -15,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       
       <head>
         <ThemeInitScript />
+        <link rel="icon" href="/favicon.png" />
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
