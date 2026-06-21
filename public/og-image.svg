@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="100%" height="100%" fill="#0f172a" />
+  <text x="60" y="200" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="64">Rajat Gupta</text>
+  <text x="60" y="300" fill="#9aa4b2" font-family="Arial, Helvetica, sans-serif" font-size="36">Java Backend Engineer | Spring Boot | Microservices</text>
+</svg>
