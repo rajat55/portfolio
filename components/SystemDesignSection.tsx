@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FiArrowDown, FiArrowRight, FiSmartphone, FiLock } from "react-icons/fi";
 import { TbArrowsSplit, TbShieldLock, TbCube, TbBolt, TbDatabase, TbRefresh } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 interface Chip {
   label: string;
@@ -306,15 +306,19 @@ export default function SystemDesignSection() {
       <div className="relative z-10 mx-auto max-w-[880px]">
         <SectionEyebrow>System design</SectionEyebrow>
         <SectionHeading lead="How I build" outline="scalable systems" className="mb-3" />
-        <p className="mb-5 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 520 }}>
-          Follow a request as it travels through a production backend — from the first network hop to the database
-          and back, with the patterns that keep it fast and resilient under load.
-        </p>
+        <Reveal delay={140}>
+          <p className="mb-5 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 520 }}>
+            Follow a request as it travels through a production backend — from the first network hop to the database
+            and back, with the patterns that keep it fast and resilient under load.
+          </p>
+        </Reveal>
 
-        <div className="mb-[60px] flex items-center gap-[7px] font-mono text-text-quaternary" style={{ fontSize: 10.5 }}>
-          <FiArrowDown className="animate-bounce text-violet" size={13} />
-          Scroll to walk through the architecture
-        </div>
+        <Reveal delay={220}>
+          <div className="mb-[60px] flex items-center gap-[7px] font-mono text-text-quaternary" style={{ fontSize: 10.5 }}>
+            <FiArrowDown className="animate-bounce text-violet" size={13} />
+            Scroll to walk through the architecture
+          </div>
+        </Reveal>
 
         <div ref={storyRef} className="relative">
           <div className="absolute" style={{ left: 27, top: 6, bottom: 6, width: 2, background: "var(--border-subtle)", borderRadius: 2 }} />

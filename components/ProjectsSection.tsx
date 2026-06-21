@@ -1,7 +1,7 @@
 "use client";
 
 import { TbBrain, TbUsers, TbShoppingCart, TbPencil, TbBrandGithub, TbPlayerPlay } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 interface ProjectLink {
   label: string;
@@ -103,17 +103,19 @@ export default function ProjectsSection() {
       <div className="relative z-10 mx-auto max-w-[1060px]">
         <SectionEyebrow>Personal projects</SectionEyebrow>
         <SectionHeading lead="Things I've" outline="built solo" className="mb-3" />
-        <p className="mb-12 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 480 }}>
-          From full-stack social platforms to AI-native retrieval systems — projects built to explore, learn, and ship end-to-end.
-        </p>
+        <Reveal delay={140}>
+          <p className="mb-12 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 480 }}>
+            From full-stack social platforms to AI-native retrieval systems — projects built to explore, learn, and ship end-to-end.
+          </p>
+        </Reveal>
 
-        <div className="grid gap-[18px]" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
-          {PROJECTS.map((project) => {
+        <div className="grid items-stretch gap-[18px]" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
+          {PROJECTS.map((project, i) => {
             const c = ACCENT_VARS[project.accent];
             return (
+              <Reveal key={project.id} delay={i * 90} threshold={0.08} className="h-full">
               <div
-                key={project.id}
-                className="relative flex flex-col gap-4 overflow-hidden transition-all duration-200"
+                className="relative flex h-full flex-col gap-4 overflow-hidden transition-all duration-200"
                 style={{
                   borderRadius: 16,
                   background: "var(--bg-surface)",
@@ -206,6 +208,7 @@ export default function ProjectsSection() {
                   ))}
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>

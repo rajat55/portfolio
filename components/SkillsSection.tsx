@@ -5,7 +5,7 @@ import {
   FiCode, FiServer, FiDatabase, FiCloud, FiLayout,
 } from "react-icons/fi";
 import { TbBrain } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 type Category = "all" | "languages" | "backend" | "databases" | "cloud" | "ai" | "frontend";
 type AccentKey = "orange" | "violet" | "cyan" | "blue" | "green" | "pink";
@@ -96,40 +96,44 @@ export default function SkillsSection() {
       <div className="relative z-10 mx-auto max-w-[1060px]">
         <SectionEyebrow>Technical skills</SectionEyebrow>
         <SectionHeading lead="What I" outline="work with" className="mb-3" />
-        <p className="mb-10 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 460 }}>
-          A full-stack of backend expertise — from core Java to event-driven systems, cloud infra, and AI-native RAG pipelines.
-        </p>
+        <Reveal delay={140}>
+          <p className="mb-10 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 460 }}>
+            A full-stack of backend expertise — from core Java to event-driven systems, cloud infra, and AI-native RAG pipelines.
+          </p>
+        </Reveal>
 
         {/* Filter tabs */}
-        <div className="mb-9 flex flex-wrap gap-[6px]">
-          {FILTERS.map(({ id, label }) => {
-            const isOn = active === id;
-            return (
-              <button
-                key={id}
-                onClick={() => setActive(id)}
-                className="cursor-pointer rounded-full transition-all duration-150"
-                style={{
-                  fontSize: 12, fontWeight: 500, padding: "6px 14px", letterSpacing: ".02em",
-                  border: isOn ? "1px solid var(--accent-violet-border)" : "1px solid var(--border-default)",
-                  background: isOn ? "var(--accent-violet-soft)" : "transparent",
-                  color: isOn ? "var(--accent-violet-text)" : "var(--text-secondary)",
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
-        </div>
+        <Reveal delay={200}>
+          <div className="mb-9 flex flex-wrap gap-[6px]">
+            {FILTERS.map(({ id, label }) => {
+              const isOn = active === id;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActive(id)}
+                  className="cursor-pointer rounded-full transition-all duration-150"
+                  style={{
+                    fontSize: 12, fontWeight: 500, padding: "6px 14px", letterSpacing: ".02em",
+                    border: isOn ? "1px solid var(--accent-violet-border)" : "1px solid var(--border-default)",
+                    background: isOn ? "var(--accent-violet-soft)" : "transparent",
+                    color: isOn ? "var(--accent-violet-text)" : "var(--text-secondary)",
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
 
         {/* Cards grid */}
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
-          {visible.map((card) => {
+        <div className="grid items-stretch gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))" }}>
+          {visible.map((card, i) => {
             const a = ACCENT_VARS[card.accent];
             return (
+              <Reveal key={card.id} delay={i * 70} threshold={0.05} className="h-full">
               <div
-                key={card.id}
-                className="rounded-[14px] transition-all duration-200"
+                className="flex h-full flex-col rounded-[14px] transition-all duration-200"
                 style={{ background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "20px 20px 18px" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = a.border; e.currentTarget.style.transform = "translateY(-1px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border-subtle)"; e.currentTarget.style.transform = "translateY(0)"; }}
@@ -143,7 +147,7 @@ export default function SkillsSection() {
                   </span>
                 </div>
 
-                <div className="flex flex-wrap gap-[6px]">
+                <div className="mt-auto flex flex-wrap gap-[6px]">
                   {card.skills.map((skill) => (
                     <span
                       key={skill}
@@ -154,6 +158,7 @@ export default function SkillsSection() {
                   ))}
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>

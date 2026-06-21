@@ -157,8 +157,8 @@ export default function HeroSection() {
         <div className="flex flex-1 flex-col gap-[22px]">
 
           <div
-            className="inline-flex w-fit items-center gap-2 rounded-full"
-            style={{ padding: "5px 14px 5px 8px", border: "1px solid var(--accent-green-border)", background: "var(--accent-green-soft)" }}
+            className="inline-flex w-fit items-center gap-2 rounded-full animate-hero-rise"
+            style={{ padding: "5px 14px 5px 8px", border: "1px solid var(--accent-green-border)", background: "var(--accent-green-soft)", animationDelay: "0ms" }}
           >
             <span className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: "var(--accent-green-soft)" }}>
               <span className="h-2 w-2 animate-pulse rounded-full" style={{ background: "var(--accent-green)" }} />
@@ -168,31 +168,51 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-violet" style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: ".22em", textTransform: "uppercase" }}>
+          <div
+            className="flex items-center gap-2 font-mono text-violet animate-hero-rise"
+            style={{ fontSize: 10.5, fontWeight: 500, letterSpacing: ".22em", textTransform: "uppercase", animationDelay: "40ms" }}
+          >
             <span style={{ display: "inline-block", width: 20, height: 1, background: "var(--accent-violet)", opacity: 0.6 }} />
             Backend Engineer
           </div>
 
           <div style={{ lineHeight: ".98", letterSpacing: "-.04em" }}>
-            <div className="text-text-primary" style={{ fontSize: "clamp(3rem,5.5vw,4.8rem)", fontWeight: 900 }}>
+            <div
+              className="text-text-primary animate-hero-rise"
+              style={{ fontSize: "clamp(3rem,5.5vw,4.8rem)", fontWeight: 900, animationDelay: "100ms" }}
+            >
               Rajat
             </div>
             <div
-              className="text-transparent"
-              style={{ fontSize: "clamp(3rem,5.5vw,4.8rem)", fontWeight: 900, WebkitTextStroke: "1.5px var(--accent-violet-border)" }}
+              className="animate-hero-rise"
+              style={{
+                fontSize: "clamp(3rem,5.5vw,4.8rem)",
+                fontWeight: 900,
+                animationDelay: "180ms",
+                background: "linear-gradient(120deg, var(--accent-violet) 0%, var(--accent-cyan) 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
             >
               Gupta
             </div>
           </div>
 
-          <div style={{ width: 32, height: 1.5, background: "linear-gradient(90deg, var(--accent-violet), transparent)", borderRadius: 2 }} />
+          <div
+            className="animate-hero-rise"
+            style={{ width: 32, height: 1.5, background: "linear-gradient(90deg, var(--accent-violet), transparent)", borderRadius: 2, animationDelay: "260ms" }}
+          />
 
-          <p className="text-text-secondary" style={{ fontSize: 14.5, lineHeight: 1.75, maxWidth: 380 }}>
+          <p
+            className="text-text-secondary animate-hero-rise"
+            style={{ fontSize: 14.5, lineHeight: 1.75, maxWidth: 380, animationDelay: "320ms" }}
+          >
             Building <span className="font-medium text-text-primary">scalable, high-throughput systems</span> with
             Java and Spring Boot — from optimized REST APIs to event-driven microservices on cloud-native infrastructure.
           </p>
 
-          <div className="flex">
+          <div className="flex animate-hero-rise" style={{ animationDelay: "380ms" }}>
             {STATS.map(([val, lbl], i) => (
               <div
                 key={lbl}
@@ -205,7 +225,7 @@ export default function HeroSection() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-[10px] pt-1">
+          <div className="flex flex-wrap gap-[10px] pt-1 animate-hero-rise" style={{ animationDelay: "440ms" }}>
             <a
               href="#projects"
               className="cursor-pointer rounded-[10px] text-white no-underline"
@@ -216,7 +236,7 @@ export default function HeroSection() {
               View Projects
             </a>
             <a
-              href="/resume.pdf"
+              href="https://drive.google.com/file/d/1spficiQpQ6mSFGdK36G-aqZ_AVz_hczY/view?usp=drive_link"
               download
               className="cursor-pointer rounded-[10px] text-text-secondary no-underline"
               style={{ padding: "11px 26px", fontSize: 13.5, fontWeight: 500, letterSpacing: ".01em", background: "transparent", border: "1px solid var(--border-default)", transition: "all .15s" }}
@@ -229,7 +249,8 @@ export default function HeroSection() {
         </div>
 
         {/* RIGHT — terminal carousel */}
-        <div className="flex w-full flex-1 max-w-[500px] flex-col gap-[10px]">
+        <div className="flex w-full flex-1 max-w-[500px] flex-col gap-[10px] animate-hero-rise" style={{ animationDelay: "200ms" }}>
+          <div className="animate-soft-float">
           <div
             className="relative overflow-hidden rounded-2xl"
             style={{ background: "var(--bg-surface)", border: "1px solid var(--border-default)", boxShadow: `0 0 0 1px var(--accent-violet-soft), 0 24px 60px var(--shadow-color)` }}
@@ -310,6 +331,7 @@ export default function HeroSection() {
                 />
               ))}
             </div>
+          </div>
           </div>
 
           <div className="flex flex-wrap justify-center gap-[6px]">

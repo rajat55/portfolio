@@ -171,3 +171,52 @@ body {
 .no-theme-transition * {
   transition-property: none;
 }
+
+/* ── Shared animation keyframes ──────────────────────────────────────── */
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-hero-rise {
+  opacity: 0;
+  animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-soft-float {
+  animation: soft-float 4.5s ease-in-out infinite;
+}
+
+@keyframes gentle-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 var(--accent-violet-soft); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.animate-pulse-ring {
+  animation: gentle-pulse-ring 2.4s ease-out infinite;
+}
+
+@keyframes underline-grow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-rise,
+  .animate-soft-float,
+  .animate-pulse-ring {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

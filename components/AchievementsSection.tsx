@@ -1,7 +1,7 @@
 "use client";
 
 import { TbSchool, TbTrophy, TbStar, TbBrandGithub } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 type AccentKey = "amber" | "violet" | "cyan" | "green";
 
@@ -76,17 +76,19 @@ export default function AchievementsSection() {
       <div className="relative z-10 mx-auto max-w-[1060px]">
         <SectionEyebrow>Achievements & recognition</SectionEyebrow>
         <SectionHeading lead="Milestones &" outline="awards" className="mb-3" />
-        <p className="mb-12 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 440 }}>
-          Recognized for technical excellence, consistent high performance, and contributions that go beyond the job description.
-        </p>
+        <Reveal delay={140}>
+          <p className="mb-12 text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 440 }}>
+            Recognized for technical excellence, consistent high performance, and contributions that go beyond the job description.
+          </p>
+        </Reveal>
 
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
-          {ACHIEVEMENTS.map((a) => {
+        <div className="grid items-stretch gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
+          {ACHIEVEMENTS.map((a, i) => {
             const c = ACCENT_VARS[a.accent];
             return (
+              <Reveal key={a.id} delay={i * 90} threshold={0.1} className="h-full">
               <div
-                key={a.id}
-                className="flex flex-col gap-4 transition-all duration-200"
+                className="flex h-full flex-col gap-4 transition-all duration-200"
                 style={{ borderRadius: 16, background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "24px 22px 22px" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = c.border; e.currentTarget.style.transform = "translateY(-2px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border-subtle)"; e.currentTarget.style.transform = "translateY(0)"; }}
@@ -108,13 +110,14 @@ export default function AchievementsSection() {
                   <p className="text-text-tertiary" style={{ fontSize: 12.5, lineHeight: 1.6, marginTop: 2 }}>{a.description}</p>
                 </div>
 
-                <div style={{ height: 1, background: "var(--border-subtle)", margin: "0 -22px" }} />
+                <div style={{ marginTop: "auto", height: 1, background: "var(--border-subtle)", marginLeft: -22, marginRight: -22 }} />
 
                 <div className="flex items-center gap-[7px]">
                   <span className="flex-shrink-0" style={{ width: 6, height: 6, borderRadius: "50%", background: c.solid }} />
                   <span style={{ fontSize: 11.5, fontWeight: 500, letterSpacing: ".02em", color: "var(--text-secondary)" }}>{a.footer}</span>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>

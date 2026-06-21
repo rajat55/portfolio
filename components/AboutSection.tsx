@@ -2,7 +2,7 @@
 
 import { FiBriefcase, FiHeart } from "react-icons/fi";
 import { TbSchool, TbStack2 } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 interface StatCard {
   id: string;
@@ -39,7 +39,7 @@ export default function AboutSection() {
 
         <div className="flex flex-col items-start gap-12 lg:flex-row">
           {/* Paragraphs */}
-          <div className="flex flex-[1.3] flex-col gap-5">
+          <Reveal delay={140} direction="right" className="flex flex-[1.3] flex-col gap-5">
             <p className="text-text-secondary" style={{ fontSize: 15, lineHeight: 1.85 }}>
               I&apos;m a <span className="font-semibold text-violet-text">Bachelor of Technology</span> graduate
               from Galgotias College of Engineering with a strong foundation in Electronics and Communication
@@ -55,15 +55,15 @@ export default function AboutSection() {
               with modern frontend experiences using{" "}
               <span className="font-semibold" style={{ color: "var(--accent-cyan-text)" }}>React and Next.js</span>.
             </p>
-          </div>
+          </Reveal>
 
           {/* Stat cards */}
           <div className="grid w-full flex-1 gap-[14px]" style={{ gridTemplateColumns: "1fr 1fr" }}>
-            {STATS.map((stat) => {
+            {STATS.map((stat, i) => {
               const c = ACCENT_VARS[stat.accent];
               return (
+                <Reveal key={stat.id} delay={200 + i * 90} direction="left">
                 <div
-                  key={stat.id}
                   className="relative flex flex-col gap-[14px] transition-all duration-200"
                   style={{ borderRadius: 14, background: "var(--bg-surface)", border: "1px solid var(--border-subtle)", padding: "22px 18px" }}
                   onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -80,6 +80,7 @@ export default function AboutSection() {
                     <div className="text-text-tertiary" style={{ fontSize: 12, fontWeight: 500, marginTop: 2 }}>{stat.label}</div>
                   </div>
                 </div>
+                </Reveal>
               );
             })}
           </div>

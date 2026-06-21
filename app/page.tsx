@@ -7,6 +7,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import FooterSection from "@/components/FooterSection";
+import DsaStatsSection from "@/components/DSA";
 
 export default function Home() {
   return (
@@ -15,6 +16,8 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+
+      <DsaStatsSection/>
       <SystemDesignSection />
       <ExperienceSection />
       <ProjectsSection />

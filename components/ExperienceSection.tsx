@@ -7,7 +7,7 @@ import {
 import {
   TbBuildingSkyscraper, TbCreditCard, TbChartDots, TbDeviceLaptop, TbBroadcast,
 } from "react-icons/tb";
-import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading } from "./section-decor";
+import { SectionGrid, GlowOrb, SectionEyebrow, SectionHeading, Reveal } from "./section-decor";
 
 interface Experience {
   id: string;
@@ -207,6 +207,28 @@ function ExperienceCard({ exp }: { exp: Experience }) {
 }
 
 export default function ExperienceSection() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [fillHeight, setFillHeight] = useState(0);
+
+  useEffect(() => {
+    const handler = () => {
+      const el = timelineRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height - 16;
+      const scrolled = Math.min(Math.max(vh * 0.5 - rect.top, 0), total);
+      setFillHeight(scrolled);
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler);
+    handler();
+    return () => {
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
+    };
+  }, []);
+
   return (
     <section id="experience" className="relative overflow-hidden bg-base" style={{ padding: "88px 48px 96px" }}>
       <SectionGrid />
@@ -216,26 +238,45 @@ export default function ExperienceSection() {
       <div className="relative z-10 mx-auto max-w-[980px]">
         <SectionEyebrow>Work experience</SectionEyebrow>
         <SectionHeading lead="Where I've" outline="built impact" className="mb-3" />
-        <p className="mb-[52px] text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 480 }}>
-          3.5+ years engineering scalable backend systems for enterprise banking and lending platforms.
-        </p>
+        <Reveal delay={140}>
+          <p className="mb-[52px] text-text-secondary" style={{ fontSize: 14, lineHeight: 1.7, maxWidth: 480 }}>
+            3.5+ years engineering scalable backend systems for enterprise banking and lending platforms.
+          </p>
+        </Reveal>
 
-        <div className="relative">
-          <div className="absolute" style={{ left: 21, top: 8, bottom: 8, width: 1, background: "linear-gradient(to bottom, var(--accent-violet-border), transparent)" }} />
+        <div ref={timelineRef} className="relative">
+          {/* Static background line */}
+          <div className="absolute" style={{ left: 21, top: 8, bottom: 8, width: 1.5, background: "var(--border-subtle)", borderRadius: 2 }} />
+          {/* Scroll-progress fill */}
+          <div
+            className="absolute"
+            style={{
+              left: 21, top: 8, width: 1.5, borderRadius: 2,
+              background: "linear-gradient(to bottom, var(--accent-violet), var(--accent-cyan))",
+              height: fillHeight,
+              transition: "height 0.15s linear",
+            }}
+          />
 
-          {EXPERIENCES.map((exp) => (
-            <ExperienceCard key={exp.id} exp={exp} />
+          {EXPERIENCES.map((exp, i) => (
+            <Reveal key={exp.id} delay={Math.min(i, 3) * 70} direction="right" distance={18}>
+              <ExperienceCard exp={exp} />
+            </Reveal>
           ))}
 
-          <div className="flex items-center gap-3" style={{ margin: "8px 0 24px 62px" }}>
-            <span className="font-mono whitespace-nowrap text-text-quaternary" style={{ fontSize: 10, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase" }}>
-              Earlier internships
-            </span>
-            <div className="flex-1" style={{ height: 1, background: "var(--border-subtle)" }} />
-          </div>
+          <Reveal delay={0}>
+            <div className="flex items-center gap-3" style={{ margin: "8px 0 24px 62px" }}>
+              <span className="font-mono whitespace-nowrap text-text-quaternary" style={{ fontSize: 10, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase" }}>
+                Earlier internships
+              </span>
+              <div className="flex-1" style={{ height: 1, background: "var(--border-subtle)" }} />
+            </div>
+          </Reveal>
 
-          {INTERNSHIPS.map((exp) => (
-            <ExperienceCard key={exp.id} exp={exp} />
+          {INTERNSHIPS.map((exp, i) => (
+            <Reveal key={exp.id} delay={i * 70} direction="right" distance={18}>
+              <ExperienceCard exp={exp} />
+            </Reveal>
           ))}
         </div>
       </div>
